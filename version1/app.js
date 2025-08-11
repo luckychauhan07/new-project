@@ -10,6 +10,7 @@ app.use((req, res, next) => {
 	console.log(req.url, req.method);
 	res.render("lucky");
 });
+console.log("lucky chauhan testing the git new repo");
 
 const PORT = 3000;
 app.listen(PORT, () => {
