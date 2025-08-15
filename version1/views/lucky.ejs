@@ -1,11 +1,112 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Document</title>
-	</head>
-	<body>
-		<h1>welcome to my page</h1>
-	</body>
-</html>
+<%- include('partials/header')%>
+<!-- Main Content -->
+<div class="flex-1 p-6 lg:p-10 bg-slate-50">
+	<header
+		class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8"
+	>
+		<div>
+			<h2 class="text-4xl font-extrabold text-slate-900 tracking-tight">
+				Welcome Back!
+			</h2>
+			<p class="text-slate-500 mt-1">
+				Here's a list of your activities for today.
+			</p>
+		</div>
+		<a href="/add-task">
+		<button
+			class="mt-4 sm:mt-0 bg-violet-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-violet-700 transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 shadow-lg"
+		>
+			+ Add New Task
+		</button></a>
+	</header>
+
+	<main>
+		<!-- Filters -->
+		<div class="mb-6">
+			<h3 class="text-lg font-semibold mb-3 text-slate-600">Filters</h3>
+			<div class="flex flex-wrap items-center gap-2">
+				<a
+					href="/all-tasks"
+					class="bg-violet-100 text-violet-700 font-semibold px-4 py-2 text-sm rounded-full shadow-sm"
+					>All</a
+				>
+				<a
+					href="/completed-tasks"
+					class="bg-white text-slate-600 font-semibold px-4 py-2 text-sm rounded-full hover:bg-slate-100 transition-colors shadow-sm border"
+					>Completed</a
+				>
+				<a
+					href="/upcoming-tasks"
+					class="bg-white text-slate-600 font-semibold px-4 py-2 text-sm rounded-full hover:bg-slate-100 transition-colors shadow-sm border"
+					>Upcoming</a
+				>
+				<a
+					href="/pending-tasks"
+					class="bg-white text-slate-600 font-semibold px-4 py-2 text-sm rounded-full hover:bg-slate-100 transition-colors shadow-sm border"
+					>Pending</a
+				>
+			</div>
+		</div>
+
+		<!-- Task Cards -->
+		<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+			<!-- Card 1 -->
+			<div
+				class="bg-white p-6 rounded-xl shadow-md border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition-all"
+			>
+				<div class="flex items-center justify-between mb-4">
+					<span
+						class="text-sm font-medium text-green-600 bg-green-100 px-3 py-1 rounded-full"
+						>Completed</span
+					>
+					<span class="text-sm text-slate-500">Aug 12</span>
+				</div>
+				<h4 class="font-bold text-lg text-slate-800 mb-2">
+					Design the new landing page
+				</h4>
+				<p class="text-slate-600 text-sm">
+					Finalize the Figma mockups and prepare assets for
+					development.
+				</p>
+			</div>
+			<!-- Card 2 -->
+			<div
+				class="bg-white p-6 rounded-xl shadow-md border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition-all"
+			>
+				<div class="flex items-center justify-between mb-4">
+					<span
+						class="text-sm font-medium text-yellow-600 bg-yellow-100 px-3 py-1 rounded-full"
+						>Upcoming</span
+					>
+					<span class="text-sm text-slate-500">Aug 18</span>
+				</div>
+				<h4 class="font-bold text-lg text-slate-800 mb-2">
+					Develop user authentication
+				</h4>
+				<p class="text-slate-600 text-sm">
+					Implement the login and registration flow using JWT.
+				</p>
+			</div>
+			<!-- Card 3 -->
+			<div
+				class="bg-white p-6 rounded-xl shadow-md border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition-all"
+			>
+				<div class="flex items-center justify-between mb-4">
+					<span
+						class="text-sm font-medium text-red-600 bg-red-100 px-3 py-1 rounded-full"
+						>Pending</span
+					>
+					<span class="text-sm text-slate-500">Aug 15</span>
+				</div>
+				<h4 class="font-bold text-lg text-slate-800 mb-2">
+					Fix payment gateway bug
+				</h4>
+				<p class="text-slate-600 text-sm">
+					Investigate the issue reported by the QA team on Stripe
+					integration.
+				</p>
+			</div>
+		</div>
+	</main>
+	<%- include('partials/footer')%>
+
