@@ -52,7 +52,7 @@
 						<li>
 							<a
 								href="/"
-								class="flex items-center gap-3 p-3 rounded-lg bg-violet-600 text-white font-semibold shadow-md"
+								class="flex items-center gap-3 p-3 rounded-lg <%= currentPage === 'home' ? 'bg-violet-600 text-white font-semibold shadow-md' : 'hover:bg-gray-800 transition-colors' %>"
 								><svg
 									xmlns="http://www.w3.org/2000/svg"
 									class="h-5 w-5"
@@ -69,7 +69,7 @@
 						<li>
 							<a
 								href="/all-tasks"
-								class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors"
+								class="flex items-center gap-3 p-3 rounded-lg <%= currentPage === 'allTasks' ? 'bg-violet-600 text-white font-semibold shadow-md' : 'hover:bg-gray-800 transition-colors' %>"
 								><svg
 									xmlns="http://www.w3.org/2000/svg"
 									class="h-5 w-5"
@@ -88,7 +88,7 @@
 						<li>
 							<a
 								href="/teams"
-								class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors"
+								class="flex items-center gap-3 p-3 rounded-lg <%= currentPage === 'teams' ? 'bg-violet-600 text-white font-semibold shadow-md' : 'hover:bg-gray-800 transition-colors' %>"
 								><svg
 									xmlns="http://www.w3.org/2000/svg"
 									class="h-5 w-5"

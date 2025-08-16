@@ -26,23 +26,23 @@
 			<h3 class="text-lg font-semibold mb-3 text-slate-600">Filters</h3>
 			<div class="flex flex-wrap items-center gap-2">
 				<a
-					href="/all-tasks"
-					class="bg-violet-100 text-violet-700 font-semibold px-4 py-2 text-sm rounded-full shadow-sm"
+					href="/all-task"
+					class="<%= filter === 'all' ? 'bg-violet-100 text-violet-700 font-semibold px-4 py-2 text-sm rounded-full shadow-sm' : ' bg-white text-slate-600 font-semibold px-4 py-2 text-sm rounded-full hover:bg-slate-100 transition-colors shadow-sm border' %>"
 					>All</a
 				>
 				<a
 					href="/completed-tasks"
-					class="bg-white text-slate-600 font-semibold px-4 py-2 text-sm rounded-full hover:bg-slate-100 transition-colors shadow-sm border"
+					class="<%= filter === 'completed' ? 'bg-violet-100 text-violet-700 font-semibold px-4 py-2 text-sm rounded-full shadow-sm' : ' bg-white text-slate-600 font-semibold px-4 py-2 text-sm rounded-full hover:bg-slate-100 transition-colors shadow-sm border' %>"
 					>Completed</a
 				>
 				<a
 					href="/upcoming-tasks"
-					class="bg-white text-slate-600 font-semibold px-4 py-2 text-sm rounded-full hover:bg-slate-100 transition-colors shadow-sm border"
+					class="<%= filter === 'upcoming' ? 'bg-violet-100 text-violet-700 font-semibold px-4 py-2 text-sm rounded-full shadow-sm' : ' bg-white text-slate-600 font-semibold px-4 py-2 text-sm rounded-full hover:bg-slate-100 transition-colors shadow-sm border' %>"
 					>Upcoming</a
 				>
 				<a
 					href="/pending-tasks"
-					class="bg-white text-slate-600 font-semibold px-4 py-2 text-sm rounded-full hover:bg-slate-100 transition-colors shadow-sm border"
+					class="<%= filter === 'pending' ? 'bg-violet-100 text-violet-700 font-semibold px-4 py-2 text-sm rounded-full shadow-sm' : ' bg-white text-slate-600 font-semibold px-4 py-2 text-sm rounded-full hover:bg-slate-100 transition-colors shadow-sm border' %>"
 					>Pending</a
 				>
 			</div>

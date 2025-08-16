@@ -10,5 +10,12 @@ hostRouter.get("/add-task", hostController.getAddTask);
 
 hostRouter.post("/add-task", hostController.postAddTask);
 
+hostRouter.get("/completed-tasks", hostController.getCompletedTasks);
+
+hostRouter.get("/upcoming-tasks", hostController.getUpcomingTasks);
+
+hostRouter.get("/pending-tasks", hostController.getPendingTasks);
+
+hostRouter.get("/all-task", hostController.getAllTask);
 
 module.exports = hostRouter;
