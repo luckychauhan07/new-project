@@ -1,4 +1,8 @@
+const findOneItem=require("../model/todoItems")
 exports.getHome = (req, res, next) => {
+	findOneItem().then((todoItem) => {
+		console.log(todoItem);
+	});
 	console.log(req.url, req.method);
 	res.render("lucky", {
 		pageTitle: "task manager home page",

@@ -4,7 +4,8 @@ const bodyParser=require('body-parser')
 
 // INTERNAL MODULES
 const userRout = require("./routers/userRout");
-const hostRout=require('./routers/hostRouter')
+const hostRout = require('./routers/hostRouter');
+const {mongoConnect}=require("./util/datbaseUtil")
 
 // CORE MODULES
 const path = require("path");
@@ -25,6 +26,9 @@ app.use(userRout);
 app.use(hostRout)
 
 const PORT = 3000;
-app.listen(PORT, () => {
-	console.log("the server is listening at the porst number 3000");
-});
+mongoConnect(() => {
+	app.listen(PORT, () => {
+		console.log("the server is listening at the port number 3000");
+	})
+})
+
