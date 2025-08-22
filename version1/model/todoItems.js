@@ -27,4 +27,8 @@ module.exports = class TodoItem {
 			_id: new ObjectId(todoId),
 		});
 	}
+	static findByStatus(status) {
+		const db = getDb();
+		return db.collection('sample1').find({status:status}).toArray()
+	}
 };

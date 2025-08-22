@@ -50,25 +50,27 @@
 
 		<!-- Task Cards -->
 		<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+			<% allTasks.forEach(task => { %>
 			<!-- Card 1 -->
 			<div
 				class="bg-white p-6 rounded-xl shadow-md border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition-all"
 			>
 				<div class="flex items-center justify-between mb-4">
 					<span
-						class="text-sm font-medium text-green-600 bg-green-100 px-3 py-1 rounded-full"
-						>Completed</span
+						class="text-sm font-medium px-3 py-1 rounded-full <%= task.status === 'completed' ? 'text-green-600 bg-green-100' : task.status === 'upcoming' ? 'text-yellow-600 bg-yellow-100' : 'text-red-600 bg-red-100' %>"
+						>  <%= task.status %></span
 					>
-					<span class="text-sm text-slate-500">Aug 12</span>
+					<span class="text-sm text-slate-500"><%= new Date(task.taskDate).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }).replace(",", "") %>
+</span>
 				</div>
 				<h4 class="font-bold text-lg text-slate-800 mb-2">
-					Design the new landing page
+				  <%= task.taskTitle %>
 				</h4>
 				<p class="text-slate-600 text-sm">
-					Finalize the Figma mockups and prepare assets for
-					development.
+					  <%= task.taskDescription %>
 				</p>
 			</div>
+			     <% }) %>
 			<!-- Card 2 -->
 			<div
 				class="bg-white p-6 rounded-xl shadow-md border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition-all"
@@ -88,24 +90,7 @@
 				</p>
 			</div>
 			<!-- Card 3 -->
-			<div
-				class="bg-white p-6 rounded-xl shadow-md border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition-all"
-			>
-				<div class="flex items-center justify-between mb-4">
-					<span
-						class="text-sm font-medium text-red-600 bg-red-100 px-3 py-1 rounded-full"
-						>Pending</span
-					>
-					<span class="text-sm text-slate-500">Aug 15</span>
-				</div>
-				<h4 class="font-bold text-lg text-slate-800 mb-2">
-					Fix payment gateway bug
-				</h4>
-				<p class="text-slate-600 text-sm">
-					Investigate the issue reported by the QA team on Stripe
-					integration.
-				</p>
-			</div>
+			
 		</div>
 	</main>
 	<%- include('partials/footer')%>

@@ -52,6 +52,8 @@
               <div
                   class="mt-6 pt-4 border-t border-slate-200 flex items-center justify-end gap-2"
               >
+              <a
+								href="/edit-todoItem/<%= task._id %>?editing=true">
                   <button
                       class="text-sm font-medium text-slate-600 hover:text-blue-600 flex items-center gap-1.5 px-3 py-1.5 rounded-md hover:bg-slate-100 transition-colors"
                   >
@@ -71,7 +73,10 @@
                       </svg>
                       Edit
                   </button>
-                  <button
+</a>
+                  <form action="/all-tasks" method="post">
+                    <input type="text" hidden value="<%= task._id %>" name="todoItemId">
+                    <button
                       class="text-sm font-medium text-slate-600 hover:text-red-600 flex items-center gap-1.5 px-3 py-1.5 rounded-md hover:bg-red-50 transition-colors"
                   >
                       <svg
@@ -89,7 +94,7 @@
                           />
                       </svg>
                       Delete
-                  </button>
+                  </button></form>
               </div>
           </div>
           <% }) %>

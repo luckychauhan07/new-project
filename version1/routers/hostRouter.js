@@ -18,4 +18,8 @@ hostRouter.get("/pending-tasks", hostController.getPendingTasks);
 
 hostRouter.get("/all-task", hostController.getAllTask);
 
+hostRouter.post("/all-tasks", hostController.postAllTask);
+
+hostRouter.get("/edit-todoItem/:id", hostController.getEditTodoItem);
+
 module.exports = hostRouter;

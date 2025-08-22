@@ -1,24 +1,25 @@
-const findOneItem=require("../model/todoItems")
+const TodoItem = require("../model/todoItems");
 exports.getHome = (req, res, next) => {
-	findOneItem().then((todoItem) => {
-		console.log(todoItem);
+	TodoItem.fetchAll().then((allTasks) => {
+		console.log(allTasks);
+		res.render("lucky", {
+			pageTitle: "task manager home page",
+			currentPage: "home",
+			filter: "all",
+			allTasks,
+		});
 	});
-	console.log(req.url, req.method);
-	res.render("lucky", {
-		pageTitle: "task manager home page",
-		currentPage: "home",
-		filter:"all"
-	});
+	console.log("home page");
 };
-
-const allTasks = require("../data/task");
 
 exports.getTasks = (req, res, next) => {
 	console.log(req.url, req.method);
-	res.render("allTasks", {
-		pageTitle: "All Tasks page",
-		allTasks,
-		currentPage: "allTasks",
+	TodoItem.fetchAll().then((allTasks) => {
+		res.render("allTasks", {
+			pageTitle: "All Tasks page",
+			allTasks,
+			currentPage: "allTasks",
+		});
 	});
 };
 
