@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -27,13 +26,14 @@
                 <div
                     class="bg-white p-8 sm:p-10 rounded-2xl shadow-xl shadow-slate-200/50 border border-slate-100 w-full max-w-2xl">
                     <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-8">
-                        Add New Task
+                        <%= !task._id?"Add New Task":"Edit Your Task" %>
                     </h2>
-                    <form action="/add-task" method="post" class="space-y-6">
+                    <form action="/<%= editing?'edit-task':'add-task'%>" method="post" class="space-y-6">
                         <div>
                             <label for="title" class="block text-sm font-medium text-slate-700 mb-2">Task Title</label>
                             <input type="text" id="title" name="taskTitle"
                                 placeholder="e.g., Design the new landing page"
+                                value="<%= task.taskTitle?task.taskTitle:''%>"
                                 class="block w-full px-4 py-3 bg-white border border-slate-300 rounded-lg text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all"
                                 required />
                         </div>
@@ -43,7 +43,7 @@
                                 class="block text-sm font-medium text-slate-700 mb-2">Description</label>
                             <textarea id="description" name="taskDescription" rows="3"
                                 placeholder="Add a more detailed description for the task..."
-                                class="block w-full px-4 py-3 bg-white border border-slate-300 rounded-lg text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all"></textarea>
+                                class="block w-full px-4 py-3 bg-white border border-slate-300 rounded-lg text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all"><%= task.taskDescription ? task.taskDescription : '' %></textarea>
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -51,6 +51,7 @@
                                 <label for="date" class="block text-sm font-medium text-slate-700 mb-2">Due Date</label>
                                 <div class="relative">
                                     <input type="date" id="date" name="taskDate"
+                                        value="<%= task.taskDate?task.taskDate:''%>"
                                         class="block w-full px-4 py-3 pr-10 bg-white border border-slate-300 rounded-lg text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all" />
                                     <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400"
@@ -67,6 +68,7 @@
                                     (User ID)</label>
                                 <div class="relative">
                                     <input type="text" id="userId" name="taskAssignedUserId" placeholder="Enter User ID"
+                                        value="<%= task.taskAssignedUserId?task.taskAssignedUserId:''%>"
                                         class="block w-full pl-10 pr-4 py-3 bg-white border border-slate-300 rounded-lg text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all" />
                                     <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400"
@@ -80,24 +82,41 @@
                             </div>
                         </div>
 
-                        <input type="text" name="status" hidden value="upcoming">
+                        <input type="text" name="status" hidden value="<%= task.status ? task.status : 'upcoming' %>">
 
-                        <div class="flex justify-end items-center gap-4 pt-4">
-                            <a href="/"
-                                class="px-5 py-2.5 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors">
-                                Cancel
-                            </a>
-                            <button type="submit"
-                                class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg border border-transparent bg-purple-600 text-sm font-semibold text-white hover:bg-purple-700 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-all duration-300 transform hover:-translate-y-0.5">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
-                                    fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                        d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                Save Task
-                            </button>
-                        </div>
+                        <% if (task._id) { %>
+                            <input type="text" name="_id" hidden value="<%= task._id  %>">
+                            <% } %>
+                                <div class="flex justify-end items-center gap-4 pt-4">
+                                    <a href="/"
+                                        class="px-5 py-2.5 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors">
+                                        Cancel
+                                    </a>
+                                    <button type="submit"
+                                        class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg border border-transparent bg-purple-600 text-sm font-semibold text-white hover:bg-purple-700 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-all duration-300 transform hover:-translate-y-0.5">
+
+                                        <% if (task._id) { %>
+                                            <!-- ✏️ Edit Icon -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M15.232 5.232l3.536 3.536M9 13l6.232-6.232a2.5 2.5 0 113.536 3.536L12.536 16.5H9v-3.5z" />
+                                            </svg>
+                                            Update Task
+                                            <% } else { %>
+                                                <!-- ➕ Add Icon -->
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
+                                                    viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd"
+                                                        d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                                Save Task
+                                                <% } %>
+
+                                    </button>
+
+                                </div>
                     </form>
                 </div>
             </div>
@@ -107,5 +126,4 @@
     </div>
     </div>
 </body>
-
 </html>

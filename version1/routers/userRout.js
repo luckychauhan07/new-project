@@ -12,6 +12,9 @@ userRouter.get("/all-tasks", userController.getTasks);
 
 userRouter.get("/teams", userController.getTeams);
 
+userRouter.post("/mark-task-complete", userController.postCompleteTask);
+
+
 
 
 module.exports = userRouter;

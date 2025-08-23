@@ -22,4 +22,6 @@ hostRouter.post("/all-tasks", hostController.postAllTask);
 
 hostRouter.get("/edit-todoItem/:id", hostController.getEditTodoItem);
 
+hostRouter.post("/edit-task", hostController.postEditTask);
+
 module.exports = hostRouter;

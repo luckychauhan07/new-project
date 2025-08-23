@@ -1,4 +1,4 @@
-// ITERNAL MODULES
+// INTERNAL MODULES
 const TodoItem = require("../model/todoItems");
 
 exports.getAddTask = (req, res, next) => {
@@ -6,12 +6,21 @@ exports.getAddTask = (req, res, next) => {
 	res.render("host/addTask", {
 		pageTitle: "add new task page",
 		currentPage: "addTask",
+		task: {},
+		editing:false
 	});
 };
 
 exports.postAddTask = (req, res, next) => {
-	const { taskTitle, taskDescription, taskDate, taskAssignedId, status } =
+	let { taskTitle, taskDescription, taskDate, taskAssignedId,status} =
 		req.body;
+	console.log(taskDate,status,"lucky")
+	const today = new Date();
+	const dueDate = new Date(taskDate);
+	if (dueDate < today.setHours(0, 0, 0, 0)) {
+		status = "pending"; // if due date already passed
+	}
+	console.log(status)
 	const todoItem = new TodoItem(
 		taskTitle,
 		taskDescription,
@@ -19,13 +28,13 @@ exports.postAddTask = (req, res, next) => {
 		taskAssignedId,
 		status
 	);
-	console.log(req.url, req.method, todoItem);
+	console.log(req.url, req.method);
 	todoItem.save().then(() => {
 		TodoItem.fetchAll().then((allTasks) => {
 			res.render("allTasks", {
 				pageTitle: "add new task page",
 				allTasks: allTasks,
-				currentPage: "addTask",
+				currentPage: "allTasks",
 			});
 		});
 	});
@@ -90,5 +99,52 @@ exports.postAllTask = (req, res, next) => {
 exports.getEditTodoItem = (req, res, next) => {
 	const editing = req.query.editing;
 	const todoId = req.params.id;
-	console.log(editing,todoId)
-}
+	// console.log(editing, todoId);
+	TodoItem.findTodoItemByItem(todoId).then((task) => {
+		// console.log(task.status)
+		res.render("host/addTask", {
+			pageTitle: "edit task page",
+			currentPage: "addTask",
+			task,
+			editing,
+		});
+	});
+};
+
+exports.postEditTask = (req, res, next) => {
+	let {
+		taskTitle,
+		taskDescription,
+		taskDate,
+		taskAssignedId,
+		status,
+		_id,
+	} = req.body;
+	console.log(taskDate,status,req.body)
+	const today = new Date();
+	const dueDate = new Date(taskDate);
+	if (dueDate < today.setHours(0, 0, 0, 0)) {
+		status = "pending"; // if due date already passed
+	} if (dueDate > today.setHours(0, 0, 0, 0)) {
+		status="upcoming"
+	}
+		
+	const todoItem = new TodoItem(
+		taskTitle,
+		taskDescription,
+		taskDate,
+		taskAssignedId,
+		status,
+		_id
+	);
+	console.log(req.url, req.method);
+	todoItem.save().then(() => {
+		TodoItem.fetchAll().then((allTasks) => {
+			res.render("allTasks", {
+				pageTitle: "add new task page",
+				allTasks: allTasks,
+				currentPage: "allTasks",
+			});
+		});
+	});
+};

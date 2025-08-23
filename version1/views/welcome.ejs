@@ -1,264 +1,242 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title><%= pageTitle %></title>
-        <link rel="stylesheet" href="/output.css" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-            rel="stylesheet"
-        />
-        <style>
-            body {
-                font-family: "Inter", sans-serif;
-            }
-            /* Hides the browser's default calendar icon for a custom one */
-            input[type="date"]::-webkit-calendar-picker-indicator {
-                display: none;
-                -webkit-appearance: none;
-            }
-        </style>
-    </head>
-
-    <body class="bg-gray-50 text-slate-800">
-        <div class="max-w-screen-2xl ">
-            <div class="flex min-h-screen">
-                <aside
-                    class="w-64 flex-shrink-0 bg-slate-900 text-slate-400 p-6 hidden lg:flex flex-col"
-                >
-                    <div class="flex items-center gap-3 mb-12">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke-width="1.5"
-                            stroke="currentColor"
-                            class="w-8 h-8 text-purple-400"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                            />
-                        </svg>
-                        <h1 class="text-2xl font-bold text-white">
-                            Task Manager
-                        </h1>
-                    </div>
-
-                    <nav class="flex-grow">
-                        <ul class="space-y-3 text-lg">
-                            <li>
-                                <a
-                                    href="/"
-                                    class="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-800 hover:text-white transition-colors"
-                                    ><svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        class="h-5 w-5"
-                                        viewBox="0 0 20 20"
-                                        fill="currentColor"
-                                    >
-                                        <path
-                                            d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"
-                                        />
-                                    </svg>
-                                    Home</a
-                                >
-                            </li>
-                            <li>
-                                <a
-                                    href="/all-tasks"
-                                    class="flex items-center gap-3 p-3 rounded-lg bg-purple-600 text-white font-semibold shadow-md"
-                                    ><svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        class="h-5 w-5"
-                                        viewBox="0 0 20 20"
-                                        fill="currentColor"
-                                    >
-                                        <path
-                                            fill-rule="evenodd"
-                                            d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                                            clip-rule="evenodd"
-                                        />
-                                    </svg>
-                                    Tasks</a
-                                >
-                            </li>
-                            <li>
-                                <a
-                                    href="/teams"
-                                    class="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-800 hover:text-white transition-colors"
-                                    ><svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        class="h-5 w-5"
-                                        viewBox="0 0 20 20"
-                                        fill="currentColor"
-                                    >
-                                        <path
-                                            d="M9 6a3 3 0 11-6 0 3 3 0 016 0zm-2 5a5 5 0 00-5 5v1a1 1 0 001 1h8a1 1 0 001-1v-1a5 5 0 00-5-5zm6 5a1 1 0 100 2h3a1 1 0 100-2h-3zm-3-5a3 3 0 100-6 3 3 0 000 6z"
-                                        />
-                                    </svg>
-                                    Team</a
-                                >
-                            </li>
-                        </ul>
-                    </nav>
-
-                    <div>
-                        <a
-                            href="/auth/logout"
-                            class="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-800 hover:text-white transition-colors"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke-width="1.5"
-                                stroke="currentColor"
-                                class="w-5 h-5"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"
-                                />
-                            </svg>
-                            Logout
-                        </a>
-                    </div>
-                </aside>
-
-                <main class="flex-grow p-4 sm:p-6 md:p-10 flex flex-col">
-                    <div
-                        class="flex-grow flex items-center justify-center w-full"
-                    >
-                        <div
-                            class="bg-white p-8 sm:p-10 rounded-2xl shadow-xl shadow-slate-200/50 border border-slate-100 w-full max-w-2xl"
-                        >
-                            <h2
-                                class="text-3xl sm:text-4xl font-bold text-slate-900 mb-8"
-                            >
-                                Add New Task
-                            </h2>
-                            <form
-                                action="/add-task"
-                                method="post"
-                                class="space-y-6"
-                            >
-                                <div>
-                                    <label
-                                        for="title"
-                                        class="block text-sm font-medium text-slate-700 mb-2"
-                                        >Task Title</label
-                                    >
-                                    <input
-                                        type="text"
-                                        id="title"
-                                        name="taskTitle"
-                                        placeholder="e.g., Design the new landing page"
-                                        class="block w-full px-4 py-3 bg-white border border-slate-300 rounded-lg text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500 transition-all"
-                                        required
-                                    />
-                                </div>
-
-                                <div>
-                                    <label
-                                        for="description"
-                                        class="block text-sm font-medium text-slate-700 mb-2"
-                                        >Description</label
-                                    >
-                                    <textarea
-                                        id="description"
-                                        name="taskDescription"
-                                        rows="3"
-                                        placeholder="Add a more detailed description for the task..."
-                                        class="block w-full px-4 py-3 bg-white border border-slate-300 rounded-lg text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500 transition-all"
-                                    ></textarea>
-                                </div>
-                                
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div>
-                                        <label
-                                            for="date"
-                                            class="block text-sm font-medium text-slate-700 mb-2"
-                                            >Due Date</label
-                                        >
-                                        <div class="relative">
-                                            <input
-                                                type="date"
-                                                id="date"
-                                                name="taskDate"
-                                                class="block w-full px-4 py-3 pr-10 bg-white border border-slate-300 rounded-lg text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500 transition-all"
-                                            />
-                                            <div
-                                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3"
-                                            >
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                                </svg>
-                                            </div>
-                                        </div>
-                                    </div>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to Task Manager</title>
     
-                                    <div>
-                                        <label
-                                            for="userId"
-                                            class="block text-sm font-medium text-slate-700 mb-2"
-                                            >Assign To (User ID)</label
-                                        >
-                                        <div class="relative">
-                                            <input
-                                                type="text"
-                                                id="userId"
-                                                name="taskAssignedUserId"
-                                                placeholder="Enter User ID"
-                                                class="block w-full pl-10 pr-4 py-3 bg-white border border-slate-300 rounded-lg text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500 transition-all"
-                                            />
-                                            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
-                                                    <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
-                                                </svg>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+    <!-- Tailwind CSS from CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet"
+    />
+    
+    <!-- Custom Styles -->
+    <style>
+        body {
+            font-family: "Inter", sans-serif;
+        }
+        /* A subtle gradient for the hero section background */
+        .hero-gradient {
+            background: radial-gradient(circle at top left, #f3e8ff, #faf5ff, #ffffff);
+        }
+    </style>
+</head>
 
+<body class="bg-white text-slate-800 antialiased">
+    <!-- Main container -->
+    <div class="min-h-screen flex flex-col">
+        <!-- Header Navigation -->
+        <header class="bg-white/80 backdrop-blur-lg shadow-sm sticky top-0 z-50">
+            <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+                <!-- Logo -->
+                <div class="flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-violet-600">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <h1 class="text-xl font-bold text-slate-900">Task Manager</h1>
+                </div>
+                <!-- Navigation Links -->
+                <nav class="hidden md:flex items-center gap-8">
+                    <a href="#features" class="text-slate-600 hover:text-violet-600 font-medium transition-colors">Features</a>
+                    <a href="#testimonials" class="text-slate-600 hover:text-violet-600 font-medium transition-colors">Testimonials</a>
+                    <a href="#pricing" class="text-slate-600 hover:text-violet-600 font-medium transition-colors">Pricing</a>
+                </nav>
+                <!-- Action Buttons -->
+                <div class="flex items-center gap-4">
+                    <a href="/login" class="text-slate-600 hover:text-violet-600 font-semibold transition-colors">Log In</a>
+                    <a href="/signup" class="bg-violet-600 text-white font-semibold py-2 px-5 rounded-lg hover:bg-violet-700 transition-all shadow-md hover:shadow-lg">
+                        Sign Up
+                    </a>
+                </div>
+            </div>
+        </header>
 
-                                <div
-                                    class="flex justify-end items-center gap-4 pt-4"
-                                >
-                                    <button
-                                        type="button"
-                                        class="px-5 py-2.5 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors"
-                                    >
-                                        Cancel
-                                    </button>
-                                    <button
-                                        type="submit"
-                                        class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg border border-transparent bg-purple-600 text-sm font-semibold text-white hover:bg-purple-700 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-all duration-300 transform hover:-translate-y-0.5"
-                                    >
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                            <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
-                                        </svg>
-                                        Save Task
-                                    </button>
-                                </div>
-                            </form>
+        <!-- Main Content -->
+        <main class="flex-grow">
+            <!-- Hero Section -->
+            <section class="hero-gradient py-20 md:py-28">
+                <div class="container mx-auto px-6 grid md:grid-cols-2 gap-10 items-center">
+                    <div class="text-center md:text-left">
+                        <h2 class="text-4xl md:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                            Organize Your Life, One Task at a Time.
+                        </h2>
+                        <p class="mt-4 text-lg md:text-xl text-slate-600 max-w-xl mx-auto md:mx-0">
+                            Our Task Manager helps you stay focused and productive. Manage your projects, track your progress, and collaborate with your team effortlessly.
+                        </p>
+                        <div class="mt-8 flex justify-center md:justify-start gap-4">
+                            <a href="/signup">
+                                <button class="bg-violet-600 text-white font-semibold py-3 px-8 rounded-lg hover:bg-violet-700 transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500 shadow-lg">
+                                    Get Started for Free
+                                </button>
+                            </a>
                         </div>
                     </div>
+                     <!-- Hero Image -->
+                    <div class="hidden md:block">
+                        <img src="https://placehold.co/600x400/a78bfa/ffffff?text=App+Screenshot" alt="Task Manager App Screenshot" class="rounded-xl shadow-2xl transform hover:scale-105 transition-transform duration-500">
+                    </div>
+                </div>
+            </section>
 
-                    <footer
-                        class="text-center text-sm text-slate-500 py-4 mt-8 flex-shrink-0"
-                    >
-                        <p>
-                            &copy; 2025 Lucky Chauhan. All Rights Reserved.
-                        </p>
-                    </footer>
-                </main>
+            <!-- Features Section -->
+            <section id="features" class="py-20 bg-white">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-16">
+                        <h3 class="text-3xl md:text-4xl font-bold text-slate-900">Why You'll Love Our Task Manager</h3>
+                        <p class="mt-2 text-slate-500 max-w-2xl mx-auto">Everything you need to boost your productivity, streamline your workflow, and achieve your goals faster.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Feature Card -->
+                        <div class="bg-slate-50 p-8 rounded-xl border border-slate-200 hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
+                             <div class="flex items-center justify-center h-12 w-12 rounded-full bg-violet-100 text-violet-600 mb-5">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" /></svg>
+                            </div>
+                            <h4 class="font-bold text-xl text-slate-800 mb-2">Intuitive Task Management</h4>
+                            <p class="text-slate-600">Easily create, organize, and prioritize your tasks with a simple and clean interface.</p>
+                        </div>
+                        <!-- Feature Card -->
+                        <div class="bg-slate-50 p-8 rounded-xl border border-slate-200 hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
+                             <div class="flex items-center justify-center h-12 w-12 rounded-full bg-violet-100 text-violet-600 mb-5">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                            </div>
+                            <h4 class="font-bold text-xl text-slate-800 mb-2">Team Collaboration</h4>
+                            <p class="text-slate-600">Assign tasks, share files, and communicate with your team members all in one place.</p>
+                        </div>
+                        <!-- Feature Card -->
+                        <div class="bg-slate-50 p-8 rounded-xl border border-slate-200 hover:shadow-xl hover:-translate-y-2 transition-all duration-300">
+                             <div class="flex items-center justify-center h-12 w-12 rounded-full bg-violet-100 text-violet-600 mb-5">
+                               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            </div>
+                            <h4 class="font-bold text-xl text-slate-800 mb-2">Progress Tracking</h4>
+                            <p class="text-slate-600">Monitor your progress with status updates and deadlines to ensure you never miss a beat.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Testimonials Section -->
+            <section id="testimonials" class="py-20 bg-slate-50">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-16">
+                        <h3 class="text-3xl md:text-4xl font-bold text-slate-900">Loved by Teams Everywhere</h3>
+                        <p class="mt-2 text-slate-500">Don't just take our word for it, here's what our users say.</p>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <!-- Testimonial Card -->
+                        <div class="bg-white p-8 rounded-xl shadow-lg">
+                            <p class="text-slate-600 mb-6">"This is the best task manager I've ever used. It's simple, intuitive, and has helped my team become more productive than ever."</p>
+                            <div class="flex items-center">
+                                <img src="https://placehold.co/40x40/c4b5fd/ffffff?text=A" alt="User Avatar" class="w-12 h-12 rounded-full mr-4">
+                                <div>
+                                    <p class="font-semibold text-slate-800">Alex Johnson</p>
+                                    <p class="text-slate-500 text-sm">Project Manager, TechCorp</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Testimonial Card -->
+                        <div class="bg-white p-8 rounded-xl shadow-lg">
+                            <p class="text-slate-600 mb-6">"A game-changer for our workflow. The collaboration features are top-notch and have streamlined our entire process."</p>
+                            <div class="flex items-center">
+                                <img src="https://placehold.co/40x40/c4b5fd/ffffff?text=S" alt="User Avatar" class="w-12 h-12 rounded-full mr-4">
+                                <div>
+                                    <p class="font-semibold text-slate-800">Samantha Lee</p>
+                                    <p class="text-slate-500 text-sm">Creative Director, Innovate Co.</p>
+                                </div>
+                            </div>
+                        </div>
+                         <!-- Testimonial Card -->
+                        <div class="bg-white p-8 rounded-xl shadow-lg">
+                            <p class="text-slate-600 mb-6">"I can't imagine my workday without it. It keeps me organized and on track with all my projects and deadlines."</p>
+                            <div class="flex items-center">
+                                <img src="https://placehold.co/40x40/c4b5fd/ffffff?text=M" alt="User Avatar" class="w-12 h-12 rounded-full mr-4">
+                                <div>
+                                    <p class="font-semibold text-slate-800">Michael Brown</p>
+                                    <p class="text-slate-500 text-sm">Freelance Developer</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+             <!-- CTA Section -->
+            <section class="bg-violet-600">
+                <div class="container mx-auto px-6 py-20 text-center">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-white">Ready to Boost Your Productivity?</h2>
+                    <p class="mt-4 text-violet-200 max-w-2xl mx-auto">
+                        Join thousands of users who are organizing their work and life with Task Manager.
+                    </p>
+                    <div class="mt-8">
+                        <a href="/signup">
+                            <button class="bg-white text-violet-600 font-semibold py-3 px-8 rounded-lg hover:bg-slate-100 transition-transform hover:scale-105 shadow-lg">
+                                Sign Up Now
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-900 text-gray-400">
+            <div class="container mx-auto px-6 py-16">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <!-- Brand and Socials -->
+                    <div class="md:col-span-1">
+                        <div class="flex items-center gap-2 mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7 text-violet-400"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            <h1 class="text-lg font-bold text-white">Task Manager</h1>
+                        </div>
+                        <p class="text-sm">The best way to organize your work and life.</p>
+                        <div class="flex mt-6 space-x-4">
+                            <a href="#" class="hover:text-white transition-colors"><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" /></svg></a>
+                            <a href="#" class="hover:text-white transition-colors"><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg></a>
+                            <a href="#" class="hover:text-white transition-colors"><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.012 3.584-.07 4.85c-.148 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.85s.012-3.584.07-4.85c.148-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.85-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98C23.986 15.667 24 15.259 24 12s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98C15.667.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.88 1.44 1.44 0 000-2.88z" /></svg></a>
+                        </div>
+                    </div>
+                    <!-- Links -->
+                    <div>
+                        <h3 class="text-white font-semibold mb-4">Product</h3>
+                        <ul class="space-y-3">
+                            <li><a href="#" class="hover:text-white transition-colors">Features</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Pricing</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Integrations</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Updates</a></li>
+                        </ul>
+                    </div>
+                     <!-- Links -->
+                    <div>
+                        <h3 class="text-white font-semibold mb-4">Company</h3>
+                        <ul class="space-y-3">
+                            <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
+                            <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
+                        </ul>
+                    </div>
+                     <!-- Newsletter -->
+                    <div>
+                        <h3 class="text-white font-semibold mb-4">Stay Updated</h3>
+                        <p class="text-sm mb-4">Subscribe to our newsletter to get the latest news.</p>
+                        <form>
+                            <div class="flex">
+                                <input type="email" placeholder="Enter your email" class="w-full px-4 py-2 rounded-l-lg bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-violet-500 text-white">
+                                <button class="bg-violet-600 text-white font-semibold px-4 py-2 rounded-r-lg hover:bg-violet-700 transition-colors">Go</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="text-center mt-12 border-t border-gray-800 pt-8">
+                    <p>&copy; 2025 Lucky Chauhan. All Rights Reserved.</p>
+                </div>
             </div>
-        </div>
-    </body>
+        </footer>
+    </div>
+</body>
 </html>
